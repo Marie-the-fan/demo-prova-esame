@@ -368,15 +368,38 @@ public class CarrelloUtente : IGestioneCarrello
     }
 
     public bool AggiungiAlCarrello(Prodotto prodotto, int quantita)
+{
+    if (quantita <= 0)
     {
-        // TODO: completare l'aggiunta al carrello.
-        // Regole:
-        // - rifiutare quantità <= 0;
-        // - rifiutare quantità maggiore della disponibilità di magazzino;
-        // - se il prodotto è già presente, aumentare la quantità esistente;
-        // - controllare che quantità esistente + quantità richiesta non superi il magazzino.
-        throw new NotImplementedException("Completare il metodo AggiungiAlCarrello.");
+        return false;
     }
+
+    if (quantita > prodotto.QuantitaDisponibile)
+    {
+        return false;
+    }
+
+    ElementoCarrello? elementoEsistente = elementiCarrello.FirstOrDefault(
+        elemento => elemento.ProdottoSelezionato.CodiceProdotto.Equals(
+            prodotto.CodiceProdotto,
+            StringComparison.OrdinalIgnoreCase));
+
+    if (elementoEsistente != null)
+    {
+        int nuovaQuantita = elementoEsistente.QuantitaScelta + quantita;
+
+        if (nuovaQuantita > prodotto.QuantitaDisponibile)
+        {
+            return false;
+        }
+
+        elementoEsistente.CambiaQuantitaScelta(nuovaQuantita);
+        return true;
+    }
+
+    elementiCarrello.Add(new ElementoCarrello(prodotto, quantita));
+    return true;
+}
 
     public bool ModificaQuantitaNelCarrello(string codiceProdotto, int nuovaQuantita)
     {
