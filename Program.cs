@@ -232,12 +232,15 @@ public class ElementoCarrello
     }
 
     public void CambiaQuantitaScelta(int nuovaQuantita)
+{
+    if (nuovaQuantita <= 0)
     {
-        // TODO: validare che la nuova quantità sia maggiore di zero.
-        // Se è valida, aggiornare QuantitaScelta.
-        // Se non è valida, lanciare ArgumentException con un messaggio comprensibile.
-        throw new NotImplementedException("Completare il metodo CambiaQuantitaScelta.");
+        throw new ArgumentException(
+            "La quantità deve essere maggiore di zero.");
     }
+
+    QuantitaScelta = nuovaQuantita;
+}
 }
 
 public class Acquisto
