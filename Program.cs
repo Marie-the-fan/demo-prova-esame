@@ -344,12 +344,18 @@ public class CatalogoProdotti : IGestioneCatalogo
     return true;
 }
 
-    public bool ModificaQuantitaProdotto(string codiceProdotto, int variazioneQuantita)
+   public bool ModificaQuantitaProdotto(string codiceProdotto, int variazioneQuantita)
+{
+    Prodotto? prodotto = CercaProdottoPerCodice(codiceProdotto);
+
+    if (prodotto == null)
     {
-        // TODO: trovare il prodotto e chiamare prodotto.CambiaQuantita(variazioneQuantita).
-        // La variazione può essere positiva o negativa, ma il magazzino non deve scendere sotto zero.
-        throw new NotImplementedException("Completare il metodo ModificaQuantitaProdotto.");
+        return false;
     }
+
+    prodotto.CambiaQuantita(variazioneQuantita);
+    return true;
+}
 }
 
 public class CarrelloUtente : IGestioneCarrello
