@@ -401,14 +401,31 @@ public class CarrelloUtente : IGestioneCarrello
     return true;
 }
 
-    public bool ModificaQuantitaNelCarrello(string codiceProdotto, int nuovaQuantita)
+   public bool ModificaQuantitaNelCarrello(string codiceProdotto, int nuovaQuantita)
+{
+    ElementoCarrello? elemento = elementiCarrello.FirstOrDefault(
+        elementoCarrello => elementoCarrello.ProdottoSelezionato.CodiceProdotto.Equals(
+            codiceProdotto,
+            StringComparison.OrdinalIgnoreCase));
+
+    if (elemento == null)
     {
-        // TODO: trovare l'elemento del carrello e modificarne la quantità.
-        // Regole:
-        // - nuovaQuantita deve essere > 0;
-        // - nuovaQuantita non deve superare la disponibilità del prodotto.
-        throw new NotImplementedException("Completare il metodo ModificaQuantitaNelCarrello.");
+        return false;
     }
+
+    if (nuovaQuantita <= 0)
+    {
+        return false;
+    }
+
+    if (nuovaQuantita > elemento.ProdottoSelezionato.QuantitaDisponibile)
+    {
+        return false;
+    }
+
+    elemento.CambiaQuantitaScelta(nuovaQuantita);
+    return true;
+}
 
     public bool RimuoviDalCarrello(string codiceProdotto)
     {
