@@ -332,11 +332,17 @@ public class CatalogoProdotti : IGestioneCatalogo
     }
 
     public bool ModificaPrezzoProdotto(string codiceProdotto, decimal nuovoPrezzo)
+{
+    Prodotto? prodotto = CercaProdottoPerCodice(codiceProdotto);
+
+    if (prodotto == null)
     {
-        // TODO: trovare il prodotto e chiamare prodotto.CambiaPrezzo(nuovoPrezzo).
-        // Restituire false se il codice non esiste.
-        throw new NotImplementedException("Completare il metodo ModificaPrezzoProdotto.");
+        return false;
     }
+
+    prodotto.CambiaPrezzo(nuovoPrezzo);
+    return true;
+}
 
     public bool ModificaQuantitaProdotto(string codiceProdotto, int variazioneQuantita)
     {
