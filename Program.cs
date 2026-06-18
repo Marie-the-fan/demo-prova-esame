@@ -62,13 +62,31 @@ public class ApplicazioneNegozio
         catalogoProdotti.AggiungiProdotto(new Prodotto("P004", "Cavo USB-C", 9.99m, 40));
     }
 
-    private string ScegliRuolo()
+   private string ScegliRuolo()
+{
+    while (true)
     {
-        // TODO: leggere da console il ruolo scelto.
-        // Valori consigliati: "utente", "amministratore", "esci".
-        // Gestire input vuoti e maiuscole/minuscole con Trim() e ToLower().
-        throw new NotImplementedException("Completare il metodo ScegliRuolo.");
+        Console.WriteLine();
+        Console.WriteLine("Seleziona ruolo:");
+        Console.WriteLine("utente");
+        Console.WriteLine("amministratore");
+        Console.WriteLine("esci");
+        Console.Write("> ");
+
+        string ruolo = (Console.ReadLine() ?? "")
+            .Trim()
+            .ToLower();
+
+        if (ruolo == "utente" ||
+            ruolo == "amministratore" ||
+            ruolo == "esci")
+        {
+            return ruolo;
+        }
+
+        Console.WriteLine("Scelta non valida.");
     }
+}
 
     private void GestisciMenuUtente()
     {
