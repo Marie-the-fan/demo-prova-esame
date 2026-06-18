@@ -122,12 +122,24 @@ public class ApplicazioneNegozio
         throw new NotImplementedException("Completare il metodo MostraStoricoUtente.");
     }
 
-    private int LeggiInteroPositivo(string messaggio)
+   private int LeggiInteroPositivo(string messaggio)
+{
+    int valore;
+
+    while (true)
     {
-        // TODO: leggere un numero intero positivo da console.
-        // Continuare a chiedere il valore finché l'utente non inserisce un intero > 0.
-        throw new NotImplementedException("Completare il metodo LeggiInteroPositivo.");
+        Console.Write(messaggio);
+
+        string? input = Console.ReadLine();
+
+        if (int.TryParse(input, out valore) && valore > 0)
+        {
+            return valore;
+        }
+
+        Console.WriteLine("Inserire un numero intero maggiore di zero.");
     }
+}
 
     private decimal LeggiPrezzoPositivo(string messaggio)
     {
