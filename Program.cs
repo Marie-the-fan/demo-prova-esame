@@ -125,12 +125,32 @@ public class ApplicazioneNegozio
 }
 
     private void MostraCarrello()
+{
+    List<ElementoCarrello> elementi = carrelloUtente.OttieniElementi();
+
+    if (elementi.Count == 0)
     {
-        // TODO: stampare contenuto del carrello e totale.
-        // Usare carrelloUtente.OttieniElementi() e carrelloUtente.CalcolaTotale().
-        // Se il carrello è vuoto, mostrare un messaggio chiaro.
-        throw new NotImplementedException("Completare il metodo MostraCarrello.");
+        Console.WriteLine("Il carrello è vuoto.");
+        return;
     }
+
+    Console.WriteLine();
+    Console.WriteLine("===== CARRELLO =====");
+
+    foreach (ElementoCarrello elemento in elementi)
+    {
+        Console.WriteLine(
+            $"{elemento.ProdottoSelezionato.CodiceProdotto} - " +
+            $"{elemento.ProdottoSelezionato.Nome} | " +
+            $"Quantità: {elemento.QuantitaScelta} | " +
+            $"Prezzo unitario: {elemento.PrezzoUnitario:C} | " +
+            $"Totale: {elemento.CalcolaTotaleParziale():C}");
+    }
+
+    Console.WriteLine();
+    Console.WriteLine($"Totale carrello: {carrelloUtente.CalcolaTotale():C}");
+    Console.WriteLine();
+}
 
     private void MostraStoricoUtente()
     {
