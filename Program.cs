@@ -16,13 +16,14 @@ using System.Linq;
 
 public class Program
 {
-    public static void Main()
-    {
-        // Punto di ingresso della Console App.
-        ApplicazioneNegozio applicazione = new ApplicazioneNegozio();
-        // applicazione.Avvia();
-        TestNegozioOnline.EseguiTuttiITest();
-    }
+   public static void Main()
+{
+    ApplicazioneNegozio applicazione =
+        new ApplicazioneNegozio();
+
+    applicazione.Avvia();
+
+}
 }
 
 public class ApplicazioneNegozio
@@ -93,24 +94,29 @@ public class ApplicazioneNegozio
     while (true)
     {
         Console.WriteLine();
-        Console.WriteLine("Seleziona ruolo:");
-        Console.WriteLine("utente");
-        Console.WriteLine("amministratore");
-        Console.WriteLine("esci");
-        Console.Write("> ");
+        Console.WriteLine("===== SELEZIONE RUOLO =====");
+        Console.WriteLine("1 - Utente");
+        Console.WriteLine("2 - Amministratore");
+        Console.WriteLine("0 - Esci");
+        Console.Write("Scelta: ");
 
-        string ruolo = (Console.ReadLine() ?? "")
-            .Trim()
-            .ToLower();
+        string scelta = Console.ReadLine() ?? "";
 
-        if (ruolo == "utente" ||
-            ruolo == "amministratore" ||
-            ruolo == "esci")
+        switch (scelta)
         {
-            return ruolo;
-        }
+            case "1":
+                return "utente";
 
-        Console.WriteLine("Scelta non valida.");
+            case "2":
+                return "amministratore";
+
+            case "0":
+                return "esci";
+
+            default:
+                Console.WriteLine("Scelta non valida.");
+                break;
+        }
     }
 }
 
