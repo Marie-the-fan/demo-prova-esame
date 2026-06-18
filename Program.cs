@@ -604,11 +604,19 @@ public class ServizioNegozio
 }
 
     public void StampaReportProdotti()
+{
+    List<ReportProdotto> report = CreaReportProdotti();
+
+    foreach (ReportProdotto prodotto in report)
     {
-        // TODO: usare CreaReportProdotti() e stampare una riga per ogni prodotto.
-        // La riga deve contenere quantità iniziale, quantità venduta e quantità disponibile.
-        throw new NotImplementedException("Completare il metodo StampaReportProdotti.");
+        Console.WriteLine(
+            $"{prodotto.CodiceProdotto} - " +
+            $"{prodotto.NomeProdotto} | " +
+            $"Iniziale: {prodotto.QuantitaIniziale} | " +
+            $"Venduta: {prodotto.QuantitaVenduta} | " +
+            $"Disponibile: {prodotto.QuantitaDisponibile}");
     }
+}
 }
 
 public class ReportProdotto
