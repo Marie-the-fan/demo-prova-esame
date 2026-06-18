@@ -88,20 +88,131 @@ public class ApplicazioneNegozio
     }
 }
 
-    private void GestisciMenuUtente()
+   private void GestisciMenuUtente()
+{
+    bool continua = true;
+
+    while (continua)
     {
-        // TODO: implementare il menu utente.
-        // Operazioni richieste dalla traccia:
-        // - visualizzare catalogo;
-        // - aggiungere prodotto al carrello;
-        // - visualizzare carrello;
-        // - modificare quantità nel carrello;
-        // - rimuovere prodotto dal carrello;
-        // - svuotare carrello;
-        // - confermare acquisto;
-        // - visualizzare storico acquisti dell'utente.
-        throw new NotImplementedException("Completare il metodo GestisciMenuUtente.");
+        Console.WriteLine();
+        Console.WriteLine("===== MENU UTENTE =====");
+        Console.WriteLine("1 - Visualizza catalogo");
+        Console.WriteLine("2 - Aggiungi prodotto al carrello");
+        Console.WriteLine("3 - Visualizza carrello");
+        Console.WriteLine("4 - Modifica quantità nel carrello");
+        Console.WriteLine("5 - Rimuovi prodotto dal carrello");
+        Console.WriteLine("6 - Svuota carrello");
+        Console.WriteLine("7 - Conferma acquisto");
+        Console.WriteLine("8 - Visualizza storico acquisti");
+        Console.WriteLine("0 - Indietro");
+
+        string scelta = Console.ReadLine() ?? "";
+
+        switch (scelta)
+        {
+            case "1":
+                MostraCatalogo();
+                break;
+
+            case "2":
+                MostraCatalogo();
+
+                Console.Write("Codice prodotto: ");
+                string codice = Console.ReadLine() ?? "";
+
+                int quantita =
+                    LeggiInteroPositivo("Quantità: ");
+
+                if (servizioNegozio.AggiungiProdottoAlCarrello(codice, quantita))
+                {
+                    Console.WriteLine("Prodotto aggiunto.");
+                }
+                else
+                {
+                    Console.WriteLine("Operazione non riuscita.");
+                }
+                break;
+
+            case "3":
+                MostraCarrello();
+                break;
+
+            case "4":
+                MostraCarrello();
+
+                Console.Write("Codice prodotto: ");
+                string codiceModifica =
+                    Console.ReadLine() ?? "";
+
+                int nuovaQuantita =
+                    LeggiInteroPositivo("Nuova quantità: ");
+
+                if (carrelloUtente.ModificaQuantitaNelCarrello(
+                    codiceModifica,
+                    nuovaQuantita))
+                {
+                    Console.WriteLine("Quantità aggiornata.");
+                }
+                else
+                {
+                    Console.WriteLine("Prodotto non trovato o quantità non valida.");
+                }
+                break;
+
+            case "5":
+                MostraCarrello();
+
+                Console.Write("Codice prodotto: ");
+                string codiceRimozione =
+                    Console.ReadLine() ?? "";
+
+                if (carrelloUtente.RimuoviDalCarrello(codiceRimozione))
+                {
+                    Console.WriteLine("Prodotto rimosso.");
+                }
+                else
+                {
+                    Console.WriteLine("Prodotto non presente nel carrello.");
+                }
+                break;
+
+            case "6":
+                carrelloUtente.SvuotaCarrello();
+                Console.WriteLine("Carrello svuotato.");
+                break;
+
+            case "7":
+                try
+                {
+                    Console.Write("Nome utente: ");
+                    string nomeUtente =
+                        Console.ReadLine() ?? "";
+
+                    Acquisto acquisto =
+                        servizioNegozio.ConfermaAcquisto(nomeUtente);
+
+                    servizioNegozio.StampaAcquisto(acquisto);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                break;
+
+            case "8":
+                MostraStoricoUtente();
+                break;
+
+            case "0":
+                continua = false;
+                break;
+
+            default:
+                Console.WriteLine("Scelta non valida.");
+                break;
+        }
     }
+}
 
     private void GestisciMenuAmministratore()
     {
