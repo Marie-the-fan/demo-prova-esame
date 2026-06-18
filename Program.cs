@@ -99,13 +99,30 @@ public class ApplicazioneNegozio
         throw new NotImplementedException("Completare il metodo GestisciMenuAmministratore.");
     }
 
-    private void MostraCatalogo()
+   private void MostraCatalogo()
+{
+    List<Prodotto> prodotti = catalogoProdotti.OttieniTuttiIProdotti();
+
+    if (prodotti.Count == 0)
     {
-        // TODO: stampare a video tutti i prodotti.
-        // Usare catalogoProdotti.OttieniTuttiIProdotti().
-        // Per ogni prodotto mostrare codice, nome, prezzo e quantità disponibile.
-        throw new NotImplementedException("Completare il metodo MostraCatalogo.");
+        Console.WriteLine("Nessun prodotto presente nel catalogo.");
+        return;
     }
+
+    Console.WriteLine();
+    Console.WriteLine("===== CATALOGO =====");
+
+    foreach (Prodotto prodotto in prodotti)
+    {
+        Console.WriteLine(
+            $"{prodotto.CodiceProdotto} - " +
+            $"{prodotto.Nome} | " +
+            $"Prezzo: {prodotto.Prezzo:C} | " +
+            $"Disponibili: {prodotto.QuantitaDisponibile}");
+    }
+
+    Console.WriteLine();
+}
 
     private void MostraCarrello()
     {
