@@ -42,16 +42,42 @@ public class ApplicazioneNegozio
         CaricaDatiIniziali();
     }
 
-    public void Avvia()
+   public void Avvia()
+{
+    Console.Clear();
+
+    Console.WriteLine("======================================");
+    Console.WriteLine("     BENVENUTO NEL NEGOZIO ONLINE     ");
+    Console.WriteLine("======================================");
+    Console.WriteLine("Gestisci acquisti, catalogo e magazzino.");
+    Console.WriteLine();
+
+    bool continua = true;
+
+    while (continua)
     {
-        // TODO: implementare il ciclo principale della Console App.
-        // Suggerimento:
-        // 1. mostrare un messaggio di benvenuto;
-        // 2. chiedere se l'utente vuole entrare come "utente" o "amministratore";
-        // 3. chiamare GestisciMenuUtente oppure GestisciMenuAmministratore;
-        // 4. permettere l'uscita dal programma con una scelta dedicata.
-        throw new NotImplementedException("Completare il metodo Avvia.");
+        string ruolo = ScegliRuolo();
+
+        switch (ruolo)
+        {
+            case "utente":
+                GestisciMenuUtente();
+                break;
+
+            case "amministratore":
+                GestisciMenuAmministratore();
+                break;
+
+            case "esci":
+                continua = false;
+                break;
+        }
     }
+
+    Console.WriteLine();
+    Console.WriteLine("Grazie per aver utilizzato il Negozio Online.");
+    Console.WriteLine("Arrivederci!");
+}
 
     private void CaricaDatiIniziali()
     {
