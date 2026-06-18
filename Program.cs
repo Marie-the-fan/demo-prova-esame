@@ -427,12 +427,21 @@ public class CarrelloUtente : IGestioneCarrello
     return true;
 }
 
-    public bool RimuoviDalCarrello(string codiceProdotto)
+   public bool RimuoviDalCarrello(string codiceProdotto)
+{
+    ElementoCarrello? elemento = elementiCarrello.FirstOrDefault(
+        elementoCarrello => elementoCarrello.ProdottoSelezionato.CodiceProdotto.Equals(
+            codiceProdotto,
+            StringComparison.OrdinalIgnoreCase));
+
+    if (elemento == null)
     {
-        // TODO: rimuovere dal carrello l'elemento con il codice indicato.
-        // Restituire true se rimosso, false se non trovato.
-        throw new NotImplementedException("Completare il metodo RimuoviDalCarrello.");
+        return false;
     }
+
+    elementiCarrello.Remove(elemento);
+    return true;
+}
 
     public void SvuotaCarrello()
     {
