@@ -142,11 +142,23 @@ public class ApplicazioneNegozio
 }
 
     private decimal LeggiPrezzoPositivo(string messaggio)
+{
+    decimal prezzo;
+
+    while (true)
     {
-        // TODO: leggere un prezzo positivo da console.
-        // Usare decimal.TryParse e rifiutare valori minori o uguali a zero.
-        throw new NotImplementedException("Completare il metodo LeggiPrezzoPositivo.");
+        Console.Write(messaggio);
+
+        string? input = Console.ReadLine();
+
+        if (decimal.TryParse(input, out prezzo) && prezzo > 0)
+        {
+            return prezzo;
+        }
+
+        Console.WriteLine("Inserire un prezzo maggiore di zero.");
     }
+}
 }
 
 public interface IGestioneCatalogo
