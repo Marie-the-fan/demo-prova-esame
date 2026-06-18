@@ -153,12 +153,24 @@ public class ApplicazioneNegozio
 }
 
     private void MostraStoricoUtente()
+{
+    Console.Write("Nome utente: ");
+    string nomeUtente = Console.ReadLine() ?? string.Empty;
+
+    List<Acquisto> acquisti =
+        storicoAcquisti.OttieniAcquistiPerUtente(nomeUtente);
+
+    if (acquisti.Count == 0)
     {
-        // TODO: chiedere il nome utente e stampare solo gli acquisti collegati a quel nome.
-        // Usare storicoAcquisti.OttieniAcquistiPerUtente(nomeUtente).
-        throw new NotImplementedException("Completare il metodo MostraStoricoUtente.");
+        Console.WriteLine("Nessun acquisto trovato.");
+        return;
     }
 
+    foreach (Acquisto acquisto in acquisti)
+    {
+        servizioNegozio.StampaAcquisto(acquisto);
+    }
+}
    private int LeggiInteroPositivo(string messaggio)
 {
     int valore;
