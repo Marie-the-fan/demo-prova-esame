@@ -581,12 +581,27 @@ public class ServizioNegozio
             .ToList();
     }
 
-    public void StampaAcquisto(Acquisto acquisto)
+   public void StampaAcquisto(Acquisto acquisto)
+{
+    Console.WriteLine("=================================");
+    Console.WriteLine($"Utente: {acquisto.NomeUtente}");
+    Console.WriteLine($"Data: {acquisto.DataAcquisto}");
+    Console.WriteLine();
+
+    foreach (ElementoAcquistato prodotto in acquisto.ProdottiAcquistati)
     {
-        // TODO: stampare i dettagli di un acquisto.
-        // Mostrare nome utente, data, prodotti, quantità, prezzi e totale ordine.
-        throw new NotImplementedException("Completare il metodo StampaAcquisto.");
+        Console.WriteLine(
+            $"{prodotto.CodiceProdotto} - " +
+            $"{prodotto.NomeProdotto} | " +
+            $"Qta: {prodotto.QuantitaAcquistata} | " +
+            $"Prezzo: {prodotto.PrezzoUnitario:C} | " +
+            $"Totale: {prodotto.TotaleParziale:C}");
     }
+
+    Console.WriteLine();
+    Console.WriteLine($"Totale ordine: {acquisto.TotaleOrdine:C}");
+    Console.WriteLine("=================================");
+}
 
     public void StampaReportProdotti()
     {
