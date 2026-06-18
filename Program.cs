@@ -306,11 +306,17 @@ public class CatalogoProdotti : IGestioneCatalogo
     }
 
     public bool EliminaProdotto(string codiceProdotto)
+{
+    Prodotto? prodotto = CercaProdottoPerCodice(codiceProdotto);
+
+    if (prodotto == null)
     {
-        // TODO: cercare il prodotto tramite codice e rimuoverlo dalla lista.
-        // Restituire true se il prodotto è stato eliminato, false se non esiste.
-        throw new NotImplementedException("Completare il metodo EliminaProdotto.");
+        return false;
     }
+
+    prodotti.Remove(prodotto);
+    return true;
+}
 
     public Prodotto? CercaProdottoPerCodice(string codiceProdotto)
     {
